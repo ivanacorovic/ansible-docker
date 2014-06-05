@@ -1,8 +1,7 @@
----
-- hosts: docker
+- hosts: all
+  user: root
   vars_files:
     - vars/main.yml
   # user: intentionally blank
-  remote_user: "{{ deploy }}"
   roles:
-    - { role: docker}
+    - { role: create-deploy-user }

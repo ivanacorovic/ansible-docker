@@ -1,0 +1,12 @@
+deploy: deployer
+password: $6$GqS1kM5vniwP9O$nVbjk0P6tZe8nJtNxI6Adjis1DWvSFsLgQcRsTeZ6vsScAX.sxaVgCPRAi0.HnhSF3i7k06xPyvMG1/0RbS3d0
+
+docker_deps:
+- python-software-properties
+- python-apt
+- python-pycurl
+- wget
+
+linux_kernel: linux-image-generic-lts-raring
+vbox_additions_iso: http://dlc.sun.com.edgesuite.net/virtualbox/4.3.4/VBoxGuestAdditions_4.3.4.iso 
+docker_apt: "deb http://get.docker.io/ubuntu docker main"

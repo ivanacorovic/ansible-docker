@@ -1,0 +1,40 @@
+
+# install dependencies needed to run the docker lxc engine (http://www.docker.io/)
+# Basically a reworking of docker's Vagrentfile[1] into an ansible-playbook
+# [1] https://github.com/dotcloud/docker/blob/master/Vagrantfile
+
+- name: Install {{ linux_kernel }} # defined in group_vars/hosting.yml
+  when: docker_update_kernel is undefined or not docker_update_kernel
+  apt: package={{ linux_kernel }} update_cache=yes state=present
+  sudo: yes
+  notify:
+  - restart server
+
+- name: Pre-repo add dependencies
+  apt: pkg={{ item }} state=latest
+  with_items: docker_deps
+  sudo: yes
+
+- name: Add docker repository key
+  apt_key: url=https://get.docker.io/gpg state=present
+  sudo: yes
+ 
+- name: Add docker repository
+  apt_repository: repo="{{ docker_apt }}" state=present
+  sudo: yes
+
+- name: Install docker
+  apt: pkg=lxc-docker state=latest update_cache=yes
+  sudo: yes
+  notify:
+  - restart server
+
+- name: add {{ ansible_user_id }} to docker group
+  user: name={{ ansible_user_id }} groups=docker append=yes
+  sudo: yes
+
+#- name: wget VBox Additions iso for fixing after kernel update
+#  action: wget -q {{ vbox_additions_iso }}
+#  tags: vbox
+
+
