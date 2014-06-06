@@ -7,6 +7,11 @@ docker_deps:
 - python-pycurl
 - wget
 
-linux_kernel: linux-image-generic-lts-raring
-vbox_additions_iso: http://dlc.sun.com.edgesuite.net/virtualbox/4.3.4/VBoxGuestAdditions_4.3.4.iso 
+
+linux_kernel: 
+- linux-image-generic-lts-raring
+- linux-headers-generic-lts-raring
+
 docker_apt: "deb http://get.docker.io/ubuntu docker main"
+
+

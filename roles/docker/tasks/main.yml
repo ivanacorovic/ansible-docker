@@ -3,9 +3,9 @@
 # Basically a reworking of docker's Vagrentfile[1] into an ansible-playbook
 # [1] https://github.com/dotcloud/docker/blob/master/Vagrantfile
 
-- name: Install {{ linux_kernel }} # defined in group_vars/hosting.yml
-  when: docker_update_kernel is undefined or not docker_update_kernel
-  apt: package={{ linux_kernel }} update_cache=yes state=present
+- name: Install {{ item }} # defined in group_vars/hosting.yml
+  apt: package={{ item }} update_cache=yes state=present
+  with_items: linux_kernel
   sudo: yes
   notify:
   - restart server
@@ -13,6 +13,10 @@
 - name: Pre-repo add dependencies
   apt: pkg={{ item }} state=latest
   with_items: docker_deps
+  sudo: yes
+
+- name: Install apt-transport-https 
+  apt: package=apt-transport-https update_cache=yes state=present
   sudo: yes
 
 - name: Add docker repository key
@@ -28,13 +32,5 @@
   sudo: yes
   notify:
   - restart server
-
-- name: add {{ ansible_user_id }} to docker group
-  user: name={{ ansible_user_id }} groups=docker append=yes
-  sudo: yes
-
-#- name: wget VBox Additions iso for fixing after kernel update
-#  action: wget -q {{ vbox_additions_iso }}
-#  tags: vbox
 
 
