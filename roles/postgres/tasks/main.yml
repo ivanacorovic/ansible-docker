@@ -1,0 +1,36 @@
+- name: Search for Postgresql
+  command: apt-cache search postgresql-9
+  sudo: yes
+
+- name: Install wget package (Debian based)
+  action: apt pkg='wget' state=installed
+  sudo: yes
+
+- name: copy apt.postgresql.org.sh to remote node
+  copy: src=apt.postgresql.org.sh dest=/home/apt.postgresql.org.sh
+  sudo: yes
+
+- name: Change permisions for postgres.sh
+  file: path=/home/apt.postgresql.org.sh owner=deployer group=deployer mode=0777 
+  sudo: yes
+
+- name: Run apt.postgresql.org.sh
+  command: /home/apt.postgresql.org.sh 
+  sudo: yes
+
+- name: Search for Postgresql-9.3
+  command: apt-cache search postgresql-9.3
+  sudo: yes
+
+- name: Install Postgresql-9.3
+  apt: package={{ item }} update_cache=yes state=present
+  with_items: postgresql
+  sudo: yes
+
+# - name: Create a new database gitlab_production
+#   postgresql_db: name=gitlab_production
+
+# - name: create user gitlab 
+#   postgresql_user: db=gitlab_production name=gitlab password=password role_attr_flags=CREATEDB priv=ALL 
+
+

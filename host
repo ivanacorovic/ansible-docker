@@ -1,2 +1,4 @@
 [webservers]
 docker  ansible_ssh_host=162.243.74.160
+postgres ansible_ssh_host=107.170.129.162
+

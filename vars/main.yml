@@ -14,4 +14,7 @@ linux_kernel:
 
 docker_apt: "deb http://get.docker.io/ubuntu docker main"
 
+postgresql: 
+- postgresql-9.3
+- postgresql-contrib-9.3
 
