@@ -1,39 +1,39 @@
-# - name: Install build-essential # defined in group_vars/hosting.yml
-#   apt: package=build-essential update_cache=yes state=present
-#   sudo: yes
+- name: Install build-essential # defined in group_vars/hosting.yml
+  apt: package=build-essential update_cache=yes state=present
+  sudo: yes
 
-# - name: Install install tcl8.5 # defined in group_vars/hosting.yml
-#   apt: package=tcl8.5 update_cache=yes state=present
-#   sudo: yes
+- name: Install install tcl8.5 # defined in group_vars/hosting.yml
+  apt: package=tcl8.5 update_cache=yes state=present
+  sudo: yes
 
 
-# - name: Install wget package (Debian based)
-#   action: apt pkg='wget' state=installed
-#   sudo: yes
+- name: Install wget package (Debian based)
+  action: apt pkg='wget' state=installed
+  sudo: yes
 
-# - name: wget http://download.redis.io/releases/redis-2.8.9.tar.gz
-#   command: wget http://download.redis.io/releases/redis-2.8.9.tar.gz
-#   sudo: yes
+- name: wget http://download.redis.io/releases/redis-2.8.9.tar.gz
+  command: wget http://download.redis.io/releases/redis-2.8.9.tar.gz
+  sudo: yes
 
-# - name: untar the tarball
-#   sudo: true
-#   command: tar -xvf redis-2.8.9.tar.gz -C /tmp/
+- name: untar the tarball
+  sudo: true
+  command: tar -xvf redis-2.8.9.tar.gz -C /tmp/
 
-# - name: make
-#   sudo: true
-#   command: make all chdir=/tmp/redis-2.8.9
+- name: make
+  sudo: true
+  command: make all chdir=/tmp/redis-2.8.9
 
-# - name: make test
-#   sudo: true
-#   command: make test chdir=/tmp/redis-2.8.9
+- name: make test
+  sudo: true
+  command: make test chdir=/tmp/redis-2.8.9
 
-# - name: make install
-#   sudo: true
-#   command: make install chdir=/tmp/redis-2.8.9
+- name: make install
+  sudo: true
+  command: make install chdir=/tmp/redis-2.8.9
 
-# - name: delete default install_server.sh file
-#   sudo: true
-#   file: path=/tmp/redis-2.8.9/utils/install_server state=absent
+- name: delete default install_server.sh file
+  sudo: true
+  file: path=/tmp/redis-2.8.9/utils/install_server state=absent
 
 - name: copy install_server.sh to install_server
   sudo: true
