@@ -1,0 +1,8 @@
+---
+- hosts: redis
+  vars_files:
+    - vars/redis.yml
+    - vars/main.yml
+  remote_user: "{{ deploy }}"
+  roles:
+    - { role: redis}
