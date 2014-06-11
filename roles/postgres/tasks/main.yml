@@ -2,9 +2,9 @@
   command: apt-cache search postgresql-9
   sudo: yes
 
-- name: Install wget package (Debian based)
-  action: apt pkg='wget' state=installed
-  sudo: yes
+# - name: Install wget package (Debian based)
+#   action: apt pkg='wget' state=installed
+#   sudo: yes
 
 - name: copy apt.postgresql.org.sh to remote node
   copy: src=apt.postgresql.org.sh dest=/home/apt.postgresql.org.sh
