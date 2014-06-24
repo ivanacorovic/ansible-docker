@@ -1,0 +1,8 @@
+- name: git clone http://ivanacorovic@bitbucket.org/ivanacorovic/gitlabdocker.git
+  command: git clone http://ivanacorovic@bitbucket.org/ivanacorovic/gitlabdocker.git
+  
+- name: build image ideus from Dockerfile
+  command: docker build -t ideus . chdir=./gitlabdocker
+  sudo: yes
+
+

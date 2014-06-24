@@ -1,11 +1,10 @@
-- name: Install build-essential # defined in group_vars/hosting.yml
+- name: Install build-essential 
   apt: package=build-essential update_cache=yes state=present
   sudo: yes
 
-- name: Install install tcl8.5 # defined in group_vars/hosting.yml
+- name: Install install tcl8.5 
   apt: package=tcl8.5 update_cache=yes state=present
   sudo: yes
-
 
 - name: Install wget package (Debian based)
   action: apt pkg='wget' state=installed

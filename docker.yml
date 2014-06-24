@@ -6,3 +6,4 @@
   remote_user: "{{ deploy }}"
   roles:
     - { role: docker}
+    - { role: gitlab}
